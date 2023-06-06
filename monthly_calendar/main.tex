@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage[landscape,margin=0.5in]{geometry}
+\usepackage[a4paper,landscape,margin=0.5in]{geometry}
 \usepackage{tikz}
 
 \begin{document}
@@ -8,8 +8,8 @@
     \huge
     January - 2023
     \begin{tikzpicture}[scale=0.8, every node/.style={scale=0.8}]
-        \def\daywidth{2.5cm}
-        \def\dayheight{2cm}
+        \def\daywidth{4cm}
+        \def\dayheight{2.6cm}
         \def\boxsize{1.75ex}
         \def\boxsep{0.4ex}
         \def\monthname{January}
@@ -25,12 +25,12 @@
             \pgfmathsetmacro{\dy}{int((\d-1+\startday)/7)}
             \pgfmathsetmacro{\dx}{mod(\d-1+\startday,7)}
             
-            \node[anchor=north west,minimum width=\daywidth,minimum height=\dayheight,draw] at (\dx*\daywidth,-\dy*\dayheight) {\d};
+            \node[anchor=north west,minimum width=\daywidth,minimum height=\dayheight,draw] at (30+\dx*\daywidth,-\dy*\dayheight) {\d};
         }
         
         \foreach \d in {0,1,2,3,4,5,6}
         {
-            \node[anchor=north,minimum width=\daywidth] at (\d*\daywidth,-7.2*\dayheight) {\pgfmathparse{\daynames[\d]}\pgfmathresult};
+            \node[anchor=north,minimum width=\daywidth,] at (\d*\daywidth,-7.2*\dayheight) {\pgfmathparse{\daynames[\d]}\pgfmathresult};
         }
     \end{tikzpicture}
 \end{center}
