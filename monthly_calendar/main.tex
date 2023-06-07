@@ -1,6 +1,9 @@
 \documentclass{article}
 \usepackage[a4paper,landscape,margin=0.5in]{geometry}
 \usepackage{tikz}
+\usepackage{lmodern}
+\usepackage[default,scale=0.95]{opensans}
+\usepackage[T1]{fontenc}
 
 \begin{document}
 \thispagestyle{empty}
@@ -12,7 +15,7 @@
         \def\dayheight{3cm}
         \def\boxsize{1.75ex}
         \def\boxsep{0.5ex}
-        \def\upperpadding{1.5cm}
+        \def\upperpadding{2.6cm}
         \def\monthname{January}
         \def\year{2023}
         \def\startday{6} % Adjust this value to change the starting day of the week (0 - Sunday, 1 - Monday, etc.)
@@ -20,25 +23,23 @@
         
         \def\daynames{{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}}
         
-        % plan is first drawing the day names and drawing empty boxes for the days before the first day of the month
-        % then drawing the days of the month
-        % \node[anchor=north west] at (0.5*\daywidth*\numdays,0.5*\dayheight) {\monthname \ \year};
+        \node[anchor=north,align=center,font=\fontsize{30}{30}\selectfont] at (0.5\textwidth,-1cm) {\monthname \ \year};
 
         % draw the day names
         \foreach \day in {0,1,...,6} {
-            \node[anchor=north west, minimum width=\daywidth, minimum height=\boxsize, text depth=\boxsep, align=center,draw] at (30+\daywidth*\day, -\upperpadding) {\pgfmathparse{\daynames[\day]}\pgfmathresult};
+            \node[anchor=north, minimum width=\daywidth, minimum height=\boxsize, text depth=\boxsep, align=center,draw] at (30+\daywidth*\day, -\upperpadding) {\pgfmathparse{\daynames[\day]}\pgfmathresult};
         }
 
         % draw the empty boxes for the days before the first day of the month
         \foreach \day in {1,...,\startday} {
-            \node[anchor=north west, minimum width=\daywidth, minimum height=\dayheight, text depth=\boxsep, align=center, draw] at (30+\daywidth*\day-\daywidth, -\upperpadding-3*\boxsize) {};
+            \node[anchor=north, minimum width=\daywidth, minimum height=\dayheight, text depth=\boxsep, align=center, draw] at (30+\daywidth*\day-\daywidth, -\upperpadding-3*\boxsize) {};
         }
 
         \foreach \d in {1,...,\numdays} {
             \pgfmathsetmacro{\dy}{int((\d-1+\startday)/7)}
             \pgfmathsetmacro{\dx}{mod(\d-1+\startday,7)}
 
-            \node[anchor=north west,minimum width=\daywidth,minimum height=\dayheight,draw] at (30+\dx*\daywidth,-\upperpadding-\dy*\dayheight- 3*\boxsize) {\d};
+            \node[anchor=north,minimum width=\daywidth,minimum height=\dayheight,draw] at (30+\dx*\daywidth,-\upperpadding-\dy*\dayheight- 3*\boxsize) {\d};
         }
 
     \end{tikzpicture}
